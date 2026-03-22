@@ -3,32 +3,207 @@ let web3;
 let contract;
 
 // 🔴 CONFIGURATION
-const contractAddress = "0xeDd0F8568f175DAeC261Dfec025FebE4D29Ff912";
+const contractAddress = "0x34f09Bc3e1E8E64A0B2FBe5CFc3c9FF90Db4705f";
 const agentAddress = "0xCf61Dc3fc0c6ac3ec9B822EFCf006657CB2b0F30".toLowerCase();
 
 const abi = [
-    {
-        "inputs": [{ "internalType": "string", "name": "_name", "type": "string" },{ "internalType": "string", "name": "_origin", "type": "string" }],
-        "name": "addProduct", "outputs": [], "stateMutability": "nonpayable", "type": "function"
-    },
-    {
-        "inputs": [{ "internalType": "uint256", "name": "_id", "type": "uint256" },{ "internalType": "string", "name": "_status", "type": "string" }],
-        "name": "addTracking", "outputs": [], "stateMutability": "nonpayable", "type": "function"
-    },
-    {
-        "inputs": [{ "internalType": "uint256", "name": "_id", "type": "uint256" }],
-        "name": "getHistory",
-        "outputs": [{
-            "components": [
-                { "internalType": "string", "name": "status", "type": "string" },
-                { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
-                { "internalType": "address", "name": "updatedBy", "type": "address" }
-            ],
-            "internalType": "struct FoodTraceability.Track[]", "name": "", "type": "tuple[]"
-        }],
-        "stateMutability": "view", "type": "function"
-    }
+    
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_origin",
+				"type": "string"
+			}
+		],
+		"name": "addProduct",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_status",
+				"type": "string"
+			}
+		],
+		"name": "addTracking",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getHistory",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "status",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "updatedBy",
+						"type": "address"
+					}
+				],
+				"internalType": "struct FoodTraceability.Track[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "getProduct",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "origin",
+						"type": "string"
+					},
+					{
+						"internalType": "address",
+						"name": "createdBy",
+						"type": "address"
+					}
+				],
+				"internalType": "struct FoodTraceability.Product",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "productCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "productHistory",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "status",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "updatedBy",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "products",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "origin",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "createdBy",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ];
+
 
 // --- CORE LOGIC ---
 
