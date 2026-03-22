@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack | Blockchain Traceability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- QR Library - DO NOT REMOVE -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root { --primary: #2d6a4f; --bg: #081c15; --card-bg: rgba(255, 255, 255, 0.05); --text: #d8f3dc; --accent: #95d5b2; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .container { width: 100%; max-width: 600px; }
+        .glass-card { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-bottom: 20px; }
+        .hidden { display: none; }
+        input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 12px; color: white; margin-bottom: 10px; width: 100%; box-sizing: border-box; }
+        button { background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; margin-bottom: 10px; }
+        #qr-result { background: white; color: black; padding: 20px; border-radius: 10px; flex-direction: column; align-items: center; margin-top: 15px; display: none; }
+        .step { border-left: 2px solid var(--accent); padding-left: 15px; margin-bottom: 15px; position: relative; }
+        .step-status { font-weight: bold; color: var(--accent); }
+        .step-meta { font-size: 0.8em; opacity: 0.7; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header style="text-align: center; margin-bottom: 20px;">
+        <h1>EcoTrack</h1>
+        <button id="walletBtn" onclick="connectWallet()">Connect MetaMask</button>
+        <div id="roleStatus">Please connect wallet</div>
+    </header>
+
+    <!-- AGENT SECTION -->
+    <div id="agentDash" class="hidden">
+        <div class="glass-card">
+            <h3>🛡️ Agent: Register Product</h3>
+            <input id="name" placeholder="Product Name (e.g. Organic Apple)">
+            <input id="origin" placeholder="Origin (e.g. Farm XYZ)">
+            <button id="regBtn" onclick="addProduct()">Register</button>
+
+            <hr style="opacity: 0.1;">
+            
+            <h3>Update Logistics</h3>
+            <input id="id" placeholder="Product ID">
+            <input id="status" placeholder="New Status (e.g. In Transit)">
+            <button onclick="addTracking()">Update Status</button>
+
+            <!-- QR Result Area -->
+            <div id="qr-result">
+                <p style="margin: 0 0 10px 0;">Scan to Verify ID: <span id="displayID"></span></p>
+                <div id="qrcode"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CUSTOMER SECTION -->
+    <div id="customerDash" class="hidden">
+        <div class="glass-card">
+            <h3>🔍 Consumer: Verify Journey</h3>
+            <input id="viewId" placeholder="Enter Product ID">
+            <button onclick="getHistory()">Verify Journey</button>
+            <div id="timelineContainer" style="margin-top: 20px;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
