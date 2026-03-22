@@ -82,18 +82,13 @@ async function addProduct() {
 function generateQRCode(productId) {
     const qrContainer = document.getElementById("qrcode");
     const qrResultDiv = document.getElementById("qr-result");
-    const displayID = document.getElementById("displayID");
 
-    // Show the hidden section in the UI (Fixed Braces)
     if (qrResultDiv) { qrResultDiv.style.display = "flex"; }
-    if (displayID) { displayID.innerText = productId; }
-
-    // Clear any old QR code
     qrContainer.innerHTML = "";
 
-    // Generate the new QR with your Laptop IP so your phone can find it
     new QRCode(qrContainer, {
-        text: "http://192.168.29.219:5500/index.html?id=" + productId,
+        
+        text: "https://renuka2508.github.io/Organic-food-traceability-dapp/?id=" + productId,
         width: 128,
         height: 128,
         colorDark : "#000000",
