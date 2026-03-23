@@ -2,8 +2,8 @@ let web3;
 let contract;
 
 // 🔴 CONFIGURATION
-const contractAddress = "0x34f09Bc3e1E8E64A0B2FBe5CFc3c9FF90Db4705f";
-const agentAddress = "0xCf61Dc3fc0c6ac3ec9B822EFCf006657CB2b0F30".toLowerCase();
+const contractAddress = "0xfb7Db33505e76b13C804523831103c8236fA60E7";
+const agentAddress = "0x43261D8009F7A13E1E0498A0F644226DfAf326cb".toLowerCase();
 
 const abi = [
     {
